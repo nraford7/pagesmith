@@ -1,0 +1,58 @@
+#!/bin/bash
+
+# Edit with PageSmith - opens an HTML file in PageSmith visual editor
+# Drop an HTML file onto this app, or double-click it and pick a file.
+
+PORT=3333
+
+# Kill any existing PageSmith on this port
+lsof -ti:$PORT 2>/dev/null | xargs kill 2>/dev/null
+
+# If a file was passed (drag-and-drop or Open With), use its directory
+if [ -n "$1" ]; then
+    DIR=$(dirname "$1")
+else
+    # No file passed - ask the user to pick one
+    FILE=$(osascript -e 'POSIX path of (choose file of type {"html"} with prompt "Pick an HTML file to edit")')
+    if [ -z "$FILE" ]; then
+        exit 0
+    fi
+    DIR=$(dirname "$FILE")
+fi
+
+# Find npx - check common locations
+if [ -x "/opt/homebrew/bin/npx" ]; then
+    NPX="/opt/homebrew/bin/npx"
+elif [ -x "/usr/local/bin/npx" ]; then
+    NPX="/usr/local/bin/npx"
+elif command -v npx &>/dev/null; then
+    NPX=$(command -v npx)
+else
+    osascript -e 'display dialog "Node.js not found. Please install it first:\nhttps://nodejs.org" buttons {"OK"} default button "OK" with icon stop with title "PageSmith"'
+    exit 1
+fi
+
+# Start PageSmith in the background
+$NPX github:justinmassa/pagesmith --dir "$DIR" --port $PORT &
+PAGESMITH_PID=$!
+
+# Wait a moment for it to start
+sleep 2
+
+# Open the browser
+open "http://127.0.0.1:$PORT"
+
+# Show a notification that it's running
+osascript -e "display notification \"PageSmith is running on port $PORT. Close this dialog to stop it.\" with title \"PageSmith\""
+
+# Keep running until user quits - show a dialog they can dismiss to stop
+osascript -e "display dialog \"PageSmith is running!
+
+Your browser should have opened with the editor.
+Click any text to edit it, then Cmd+S to save.
+
+Click Stop when you're done editing.\" buttons {\"Stop PageSmith\"} default button \"Stop PageSmith\" with title \"PageSmith Editor\""
+
+# Clean up when dialog is dismissed
+kill $PAGESMITH_PID 2>/dev/null
+lsof -ti:$PORT 2>/dev/null | xargs kill 2>/dev/null

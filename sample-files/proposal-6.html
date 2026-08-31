@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EMIR Advisory Services — BEEAH Group — Strategic Implementation, Innovation Unit Design & Executive Office Enablement</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,700&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════════════
+   EMIR PROPOSAL — InDesign-Style HTML Template
+   Fonts: Cormorant Garamond (display serif) + Inter (body sans-serif)
+   Brand Gold: #947B37
+   All fonts via Google Fonts — fully web-portable
+   ═══════════════════════════════════════════════════════════════════════ */
+
+@page {
+  size: A4;
+  margin: 0;
+}
+
+/* ── CSS Variables ─────────────────────────────────────────────────── */
+:root {
+  --gold: #947B37;
+  --gold-light: #B89B5A;
+  --black: #1A1A1A;
+  --dark: #222222;
+  --gray-text: #333333;
+  --gray-mid: #666666;
+  --gray-light: #999999;
+  --warm-gray: #7A746E;
+  --white: #FFFFFF;
+
+  --font-display: 'Cormorant Garamond', 'Georgia', serif;
+  --font-body: 'Inter', 'Helvetica Neue', 'Arial', sans-serif;
+  --font-light: 'Inter', 'Helvetica Neue', 'Arial', sans-serif;
+
+  --page-w: 210mm;
+  --page-h: 297mm;
+}
+
+/* ── Reset & Base ──────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-body);
+  font-size: 10pt;
+  color: var(--gray-text);
+  line-height: 1.45;
+  background: #E8E8E8;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Page Container ────────────────────────────────────────────────── */
+.page {
+  width: var(--page-w);
+  min-height: var(--page-h);
+  position: relative;
+  overflow: hidden;
+  background: var(--white);
+  page-break-after: always;
+  margin: 0 auto;
+}
+/* Fixed-height pages (cover, boilerplate) keep exact A4 size */
+.page.cover, .page.value-page, .page.contents-page, .page.about-page,
+.page.bio-page, .page.back-page, .page.investment-page {
+  height: var(--page-h);
+}
+/* Proposal content pages use auto-height; the page-splitter script
+   will split them into exact A4 pages after DOM layout. */
+.page.proposal-page {
+  height: auto;
+  min-height: var(--page-h);
+  overflow: visible;
+}
+/* Continuation page created by the page-splitter script */
+.page.proposal-page-continuation {
+  height: var(--page-h);
+  overflow: hidden;
+}
+.page.proposal-page-continuation .proposal-body {
+  padding-top: 36pt;
+}
+
+/* Browser preview spacing — removed in print */
+@media screen {
+  .page { margin: 20px auto; box-shadow: 0 2px 20px rgba(0,0,0,0.2); }
+}
+@media print {
+  body { background: none; }
+  .page { margin: 0; box-shadow: none; }
+}
+
+/* ── Typography ────────────────────────────────────────────────────── */
+.display {
+  font-family: var(--font-display);
+  font-style: normal;
+  font-weight: 600;
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+}
+.display-gold { color: var(--gold); }
+.display-white { color: var(--white); }
+
+.body-text {
+  font-family: var(--font-body);
+  font-size: 10pt;
+  line-height: 1.5;
+  color: var(--gray-text);
+}
+
+.body-white {
+  font-family: var(--font-body);
+  font-size: 11pt;
+  line-height: 1.55;
+  color: var(--white);
+}
+
+.body-bold {
+  font-family: var(--font-body);
+  font-size: 11pt;
+  font-weight: 700;
+  line-height: 1.45;
+  color: var(--black);
+}
+
+h2.section-sub {
+  font-family: var(--font-body);
+  font-size: 13pt;
+  font-weight: 700;
+  color: var(--black);
+  margin: 18pt 0 8pt;
+}
+
+h3.section-minor {
+  font-family: var(--font-body);
+  font-size: 10pt;
+  font-weight: 700;
+  color: var(--black);
+  margin: 10pt 0 4pt;
+}
+
+/* ── Gold Rule ─────────────────────────────────────────────────────── */
+.gold-rule {
+  border: none;
+  border-top: 2px solid var(--gold);
+  margin: 8pt 0;
+}
+.gold-rule-thin {
+  border: none;
+  border-top: 1px solid var(--gold);
+  margin: 6pt 0;
+}
+
+/* ── Page Number ───────────────────────────────────────────────────── */
+.page-number {
+  position: absolute;
+  bottom: 18pt;
+  right: 24pt;
+  font-family: var(--font-body);
+  font-size: 8pt;
+  color: var(--gray-light);
+  font-style: italic;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PAGE 1: COVER
+   ═══════════════════════════════════════════════════════════════════════ */
+.cover {
+  display: flex;
+  flex-direction: column;
+}
+
+.cover-top {
+  height: 30%;
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24pt;
+}
+
+.cover-top img.logo {
+  max-width: 55%;
+  height: auto;
+}
+.cover-top .logo-text {
+  font-family: var(--font-display);
+  font-size: 48pt;
+  font-weight: bold;
+  color: var(--black);
+  text-align: center;
+  letter-spacing: 0.15em;
+}
+.cover-top .logo-tagline {
+  font-family: var(--font-light);
+  font-size: 10pt;
+  color: var(--gray-mid);
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  text-align: center;
+  margin-top: 4pt;
+}
+
+.cover-bottom {
+  height: 70%;
+  background: var(--black);
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 40pt 48pt;
+}
+.cover-bottom::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.3) 0%,
+    rgba(0,0,0,0.7) 60%,
+    rgba(0,0,0,0.85) 100%
+  );
+}
+.cover-bottom > * { position: relative; z-index: 1; }
+
+.cover-title {
+  font-size: 48pt;
+  margin-bottom: 4pt;
+}
+.cover-subtitle {
+  font-family: var(--font-body);
+  font-size: 18pt;
+  color: var(--white);
+  margin-bottom: 36pt;
+}
+.cover-tagline-bar {
+  border-top: 2px solid var(--gold);
+  padding-top: 8pt;
+  max-width: 60%;
+}
+.cover-tagline-bar span {
+  font-family: var(--font-body);
+  font-size: 9pt;
+  color: var(--gold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PAGE 2: THE VALUE OF EMIR
+   ═══════════════════════════════════════════════════════════════════════ */
+.value-page {
+  background: var(--warm-gray);
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+.value-page::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(90, 85, 78, 0.55);
+}
+.value-content {
+  position: relative;
+  z-index: 1;
+  padding: 48pt 48pt 48pt 48pt;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.value-heading {
+  font-size: 48pt;
+  margin-bottom: 18pt;
+}
+.value-body {
+  max-width: 65%;
+  margin-bottom: 24pt;
+}
+.value-quote {
+  font-family: var(--font-body);
+  font-size: 26pt;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.15;
+  max-width: 70%;
+  margin-top: 12pt;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PAGE 3: CONTENTS
+   ═══════════════════════════════════════════════════════════════════════ */
+.contents-page {
+  display: grid;
+  grid-template-columns: 26% 1fr;
+}
+
+.photo-strip {
+  background: #4A4A4A;
+  background-size: cover;
+  background-position: center;
+  filter: grayscale(1);
+}
+
+.contents-body {
+  padding: 72pt 48pt 48pt 48pt;
+}
+.contents-heading {
+  font-size: 40pt;
+  margin-bottom: 36pt;
+}
+.toc-list {
+  list-style: none;
+  padding: 0;
+}
+.toc-list li {
+  font-family: var(--font-body);
+  font-size: 11pt;
+  color: var(--gray-text);
+  padding: 8pt 0;
+  display: flex;
+  align-items: baseline;
+}
+.toc-list li .toc-title {
+  flex-shrink: 0;
+}
+.toc-list li .toc-dots {
+  flex: 1;
+  border-bottom: 1px dotted var(--gray-light);
+  margin: 0 6pt;
+  position: relative;
+  top: -3pt;
+}
+.toc-list li .toc-num {
+  font-style: italic;
+  color: var(--gold);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PAGE 4: ABOUT EMIR + TEAM
+   ═══════════════════════════════════════════════════════════════════════ */
+.about-page { display: flex; flex-direction: column; }
+
+.about-top {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  height: 42%;
+}
+.about-text {
+  padding: 32pt 24pt 16pt 40pt;
+}
+.about-heading {
+  font-size: 30pt;
+  margin-bottom: 12pt;
+}
+.about-photo {
+  background: #3A3A3A;
+  background-size: cover;
+  background-position: center;
+}
+
+.advisors-band {
+  background: var(--gold);
+  padding: 10pt 40pt;
+}
+.advisors-band h2 {
+  font-family: var(--font-display);
+  font-size: 22pt;
+  font-weight: bold;
+  font-style: italic;
+  color: var(--white);
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  flex: 1;
+  padding: 12pt 24pt;
+}
+.team-member {
+  display: grid;
+  grid-template-columns: 80pt 1fr;
+  gap: 8pt;
+  padding: 8pt 12pt;
+  align-items: start;
+}
+.team-photo {
+  width: 80pt;
+  height: 80pt;
+  background: #CCCCCC;
+  background-size: cover;
+  background-position: center top;
+  border-radius: 0;
+}
+.team-info {}
+.team-name {
+  font-family: var(--font-body);
+  font-size: 9pt;
+  font-weight: 700;
+  color: var(--black);
+  text-transform: uppercase;
+  margin-bottom: 1pt;
+}
+.team-role {
+  font-family: var(--font-body);
+  font-size: 7.5pt;
+  color: var(--gray-mid);
+  text-transform: uppercase;
+  margin-bottom: 4pt;
+}
+.team-bio {
+  font-family: var(--font-body);
+  font-size: 7.5pt;
+  font-style: italic;
+  color: var(--gray-text);
+  line-height: 1.35;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PAGE 5: BIOGRAPHY
+   ═══════════════════════════════════════════════════════════════════════ */
+.bio-page { padding: 36pt 40pt; }
+
+.bio-heading {
+  font-size: 36pt;
+  margin-bottom: 16pt;
+}
+
+.bio-layout {
+  display: grid;
+  grid-template-columns: 45% 1fr;
+  gap: 24pt;
+}
+
+.bio-left {}
+.bio-photo {
+  width: 100%;
+  aspect-ratio: 3/4;
+  background: #DDDDDD;
+  background-size: cover;
+  background-position: center top;
+  margin-bottom: 16pt;
+}
+.bio-pullquote {
+  font-family: var(--font-display);
+  font-size: 13pt;
+  font-weight: bold;
+  font-style: italic;
+  color: var(--black);
+  line-height: 1.35;
+  margin-bottom: 14pt;
+}
+.bio-projects-label {
+  font-family: var(--font-body);
+  font-size: 9pt;
+  font-weight: 700;
+  color: var(--black);
+  margin-bottom: 4pt;
+}
+.bio-projects {
+  list-style: disc;
+  padding-left: 14pt;
+  font-size: 8.5pt;
+  color: var(--gray-text);
+  line-height: 1.5;
+}
+
+.bio-right {}
+.bio-person-name {
+  font-family: var(--font-body);
+  font-size: 22pt;
+  font-weight: 700;
+  color: var(--black);
+  margin-bottom: 0;
+}
+.bio-title-band {
+  background: var(--gold);
+  padding: 5pt 10pt;
+  margin-bottom: 2pt;
+}
+.bio-title-band span {
+  font-family: var(--font-body);
+  font-size: 9pt;
+  font-weight: 700;
+  color: var(--white);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+.bio-org-band {
+  background: var(--black);
+  padding: 3pt 10pt;
+  margin-bottom: 14pt;
+  display: inline-block;
+}
+.bio-org-band span {
+  font-family: var(--font-body);
+  font-size: 8pt;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: 0.04em;
+}
+
+.bio-text p {
+  font-family: var(--font-body);
+  font-size: 9.5pt;
+  color: var(--gray-text);
+  line-height: 1.55;
+  margin-bottom: 8pt;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PAGE 6–7: PROPOSAL CONTENT (with left photo strip)
+   ═══════════════════════════════════════════════════════════════════════ */
+.proposal-page {
+  display: grid;
+  grid-template-columns: 12% 1fr;
+}
+
+.proposal-strip {
+  background: #3A3A3A;
+  background-size: cover;
+  background-position: center;
+}
+
+.proposal-body {
+  padding: 48pt 40pt 36pt 36pt;
+}
+.proposal-heading {
+  font-size: 44pt;
+  margin-bottom: 20pt;
+}
+
+.proposal-body p {
+  margin-bottom: 8pt;
+}
+.proposal-body ol, .proposal-body ul {
+  margin: 6pt 0 12pt 20pt;
+  font-size: 10pt;
+  color: var(--gray-text);
+  line-height: 1.55;
+}
+.proposal-body li {
+  margin-bottom: 4pt;
+}
+.proposal-body ol ol {
+  list-style-type: lower-alpha;
+  margin-top: 4pt;
+}
+
+/* ── Timeline Gantt Table ──────────────────────────────────────────── */
+.gantt-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 14pt;
+  font-family: var(--font-body);
+  font-size: 9pt;
+}
+.gantt-table thead th {
+  text-align: center;
+  font-weight: 700;
+  color: var(--white);
+  padding: 6pt 8pt;
+  background: var(--black);
+}
+.gantt-table thead th:first-child {
+  text-align: left;
+  width: 40%;
+}
+.gantt-table tbody td {
+  padding: 6pt 8pt;
+  color: var(--gray-text);
+  border-bottom: 1px solid #E0E0E0;
+  text-align: center;
+}
+.gantt-table tbody td:first-child {
+  text-align: left;
+}
+.gantt-dot {
+  display: inline-block;
+  width: 10pt;
+  height: 10pt;
+  border-radius: 50%;
+  background: var(--gold);
+}
+
+/* ── Payment Milestones Table ─────────────────────────────────────── */
+.milestone-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 18pt;
+  font-family: var(--font-body);
+  font-size: 9pt;
+}
+.milestone-table thead th {
+  text-align: left;
+  font-weight: 700;
+  color: var(--black);
+  padding: 6pt 8pt;
+  border-bottom: 2px solid var(--gold);
+}
+.milestone-table thead th:nth-child(2) { text-align: center; }
+.milestone-table tbody td {
+  padding: 6pt 8pt;
+  color: var(--gray-text);
+  border-bottom: 1px solid #E0E0E0;
+}
+.milestone-table tbody td:nth-child(2) { text-align: center; }
+.milestone-table tbody tr.total td {
+  font-weight: 700;
+  color: var(--gold);
+  border-bottom: 2px solid var(--gold);
+}
+
+/* ── Footnote ─────────────────────────────────────────────────────── */
+.footnote {
+  font-family: var(--font-body);
+  font-size: 8pt;
+  font-style: italic;
+  color: var(--gray-light);
+  margin-top: 12pt;
+}
+
+/* ── Assumptions list styling ─────────────────────────────────────── */
+.proposal-body ul.assumption-list {
+  list-style: none;
+  margin: 6pt 0 12pt 0;
+  padding: 0;
+}
+.proposal-body ul.assumption-list li {
+  padding: 4pt 0 4pt 16pt;
+  position: relative;
+}
+.proposal-body ul.assumption-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10pt;
+  width: 6pt;
+  height: 6pt;
+  background: var(--gold);
+  border-radius: 50%;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PAGE: INVESTMENT
+   ═══════════════════════════════════════════════════════════════════════ */
+.investment-page { display: flex; flex-direction: column; }
+
+.investment-banner {
+  height: 15%;
+  background: #4A4A4A;
+  background-size: cover;
+  background-position: center;
+}
+
+.investment-content {
+  padding: 36pt 48pt;
+  flex: 1;
+}
+.investment-heading {
+  font-size: 38pt;
+  margin-bottom: 16pt;
+}
+
+/* Fee table */
+.fee-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 18pt;
+  font-family: var(--font-body);
+  font-size: 9pt;
+}
+.fee-table thead th {
+  text-align: left;
+  font-weight: 700;
+  color: var(--black);
+  padding: 6pt 8pt;
+  border-bottom: 2px solid var(--gold);
+}
+.fee-table thead th:not(:first-child) {
+  text-align: center;
+}
+.fee-table tbody td {
+  padding: 6pt 8pt;
+  color: var(--gray-text);
+  border-bottom: 1px solid #E0E0E0;
+}
+.fee-table tbody td:not(:first-child) {
+  text-align: center;
+}
+.fee-table tbody tr.total td {
+  font-weight: 700;
+  color: var(--gold);
+  border-bottom: 2px solid var(--gold);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   BACK PAGE
+   ═══════════════════════════════════════════════════════════════════════ */
+.back-page {
+  background: var(--black);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.back-page img.back-logo {
+  max-width: 40%;
+  height: auto;
+  margin-bottom: 24pt;
+}
+.back-page .back-logo-text {
+  font-family: var(--font-display);
+  font-size: 48pt;
+  font-weight: bold;
+  color: var(--white);
+  letter-spacing: 0.15em;
+  margin-bottom: 24pt;
+}
+.back-contact {
+  font-family: var(--font-body);
+  font-size: 10pt;
+  color: var(--gray-light);
+  line-height: 1.8;
+}
+</style>
+
+<style id="pagesmith-styles">
+* { box-sizing: border-box; } body {margin: 0;}@media (max-width: 210mm){#i28a67{background-image:url('/project/assets/e49130a4-e88d-42ee-85eb-4311ec4dc2b7.png');background-size:cover;background-position:center;background-repeat:no-repeat;}}
+</style>
+</head>
+<body>
+<body><div class="page cover"><div class="cover-top"><div><img src="extracted_assets/EMIR_logo_white_bg.png" alt="EMIR — Successful Perspectives" class="logo"/><div class="logo-text" id="i7mp">EMIR</div></div></div><div class="cover-bottom" id="im9i"><div class="cover-title display display-gold">ADVISORY<br/>SERVICES</div><div class="cover-subtitle">BEEAH Group — Strategic Implementation, Innovation Unit Design &amp; Executive Office Enablement</div><div class="cover-tagline-bar"><span>Emerging Markets Intelligence &amp; Research</span></div></div></div><!-- ═══════════════════════════════════════════════════════════════════
+     PAGE 2: THE VALUE OF EMIR
+     ═══════════════════════════════════════════════════════════════════ --><div class="page value-page" id="ip3pu"><div class="value-content"><div class="value-heading display display-white">THE VALUE<br/>OF EMIR</div><div class="value-body body-white">
+      A collective of future thinkers. EMIR is a boutique advisory and
+      research firm that enhances the vision and practice of senior leaders
+      of multinational companies, local family trading conglomerates, SMEs
+      and government.
+    </div><div class="value-quote">
+      “BUILDING THE<br/>
+       FOUNDATIONS FOR<br/>
+       NEW FUTURES”
+    </div></div></div><!-- ═══════════════════════════════════════════════════════════════════
+     PAGE 3: CONTENTS
+     ═══════════════════════════════════════════════════════════════════ --><div class="page contents-page"><div class="photo-strip" id="i6cgx"></div><div class="contents-body"><div class="contents-heading display display-gold">CONTENTS</div><ul class="toc-list"><li><span class="toc-title">About EMIR</span><span class="toc-dots"></span><span class="toc-num">4</span></li><li><span class="toc-title">About the team</span><span class="toc-dots"></span><span class="toc-num">5</span></li><li><span class="toc-title">Executive Summary</span><span class="toc-dots"></span><span class="toc-num">6</span></li><li><span class="toc-title">Context &amp; Objectives</span><span class="toc-dots"></span><span class="toc-num">7</span></li><li><span class="toc-title">Scope of Work</span><span class="toc-dots"></span><span class="toc-num">8</span></li><li><span class="toc-title">Methodology &amp; Deliverables</span><span class="toc-dots"></span><span class="toc-num">9</span></li><li><span class="toc-title">Timeline</span><span class="toc-dots"></span><span class="toc-num">10</span></li><li><span class="toc-title">Investment</span><span class="toc-dots"></span><span class="toc-num">11</span></li><li><span class="toc-title">Assumptions &amp; Next Steps</span><span class="toc-dots"></span><span class="toc-num">12</span></li></ul></div></div><!-- ═══════════════════════════════════════════════════════════════════
+     PAGE 4: ABOUT EMIR + TEAM
+     ═══════════════════════════════════════════════════════════════════ --><div class="page about-page"><div class="about-top"><div class="about-text"><div class="about-heading display display-gold">ABOUT EMIR</div><p class="body-bold" id="ikzeee">
+        EMIR is a boutique advisory firm that believes in the power of
+        harnessing a high-calibre network through deep local knowledge
+        and credible connections.
+      </p><p class="body-text" id="ie85vj">
+        The firm is the mastermind behind Boardroom, the Middle East’s
+        most selective and influential intelligence network for CEOs,
+        government officials and other high achievers. Through its experienced
+        and high-achieving in house experts and member network, EMIR is in a
+        unique position to leverage powerful connections and niche know-how to
+        help its clients realise their visionary projects.
+      </p></div><div class="about-photo" id="iix3el"></div></div><div class="advisors-band"><h2>EMIR ADVISORS</h2></div><div class="team-grid"><!-- Row 1 --><div class="team-member"><div class="team-photo" id="ivxwj2"></div><div class="team-info"><div class="team-name">Trevor Mc Farlane</div><div class="team-role">CEO of EMIR</div><div class="team-bio">[Brief bio describing role, expertise, and notable achievements]</div></div></div><div class="team-member"><div class="team-photo" id="igrfel"></div><div class="team-info"><div class="team-name">Dr Noah Raford</div><div class="team-role">Managing Partner, Advisory</div><div class="team-bio">[Brief bio describing role, expertise, and notable achievements]</div></div></div><!-- Row 2 --><div class="team-member"><div class="team-photo"></div><div class="team-info"><div class="team-name">[Team Member Name]</div><div class="team-role">[Title / Role]</div><div class="team-bio">[Brief bio describing role, expertise, and notable achievements]</div></div></div><div class="team-member"><div class="team-photo"></div><div class="team-info"><div class="team-name">[Team Member Name]</div><div class="team-role">[Title / Role]</div><div class="team-bio">[Brief bio describing role, expertise, and notable achievements]</div></div></div><!-- Row 3 --><div class="team-member"><div class="team-photo"></div><div class="team-info"><div class="team-name">[Team Member Name]</div><div class="team-role">[Title / Role]</div><div class="team-bio">[Brief bio describing role, expertise, and notable achievements]</div></div></div><div class="team-member"><div class="team-photo"></div><div class="team-info"><div class="team-name">[Team Member Name]</div><div class="team-role">[Title / Role]</div><div class="team-bio">[Brief bio describing role, expertise, and notable achievements]</div></div></div></div><span class="page-number">4</span></div><!-- ═══════════════════════════════════════════════════════════════════
+     PAGE 5: BIOGRAPHY
+     ═══════════════════════════════════════════════════════════════════ --><div class="page bio-page"><div class="bio-heading display display-gold">BIOGRAPHY</div><div class="bio-layout"><div class="bio-left"><div class="bio-photo" id="ic5fuf"></div><div class="bio-pullquote">
+        “[Compelling quote about the person’s approach
+        or philosophy that captures their unique value.]”
+      </div><div class="bio-projects-label">Some of his/her projects include:</div><ul class="bio-projects"><li>[Notable project 1]</li><li>[Notable project 2]</li><li>[Notable project 3]</li><li>[Notable project 4]</li><li>[Notable project 5]</li></ul></div><div class="bio-right"><div class="bio-person-name">[PERSON NAME]</div><div class="bio-title-band"><span>Managing Partner – [Division]</span></div><div class="bio-org-band"><span>EMIR</span></div><div class="bio-text"><p>
+          [Person Name] heads up the EMIR [division] practice.
+          [Brief description of current role and background].
+          [He/She] is a globally respected [expertise area] who specialises
+          in delivering [type of work and creative ideas].
+        </p><p>
+          [Additional paragraph about notable achievements — regional firsts,
+          key contributions, and demonstrated impact.]
+        </p><p>
+          [Education and credentials: PhD from [University], MSc from
+          [University], undergraduate degree from [University].]
+        </p><p>
+          [Professional affiliations, board memberships, fellowships,
+          and other notable roles.]
+        </p></div></div></div><span class="page-number">5</span></div><!-- ═══════════════════════════════════════════════════════════════════
+     PAGE 6: EXECUTIVE SUMMARY
+     ═══════════════════════════════════════════════════════════════════ --><div class="page proposal-page"><div class="proposal-strip" id="iapm6d"></div><div class="proposal-body"><div class="proposal-heading display display-gold">EXECUTIVE<br/>SUMMARY</div><p class="body-text">BEEAH Group stands at a defining inflection point. Two chapters of remarkable growth — establishing waste management dominance, then diversifying into real estate and investments — have created a conglomerate of genuine regional consequence. Chapter 3 demands reconsolidation: aligning three autonomous business units around the dual ambition of becoming a global waste-to-energy leader and anchoring Sharjah’s socioeconomic transformation.</p><p class="body-text">The challenge is structural and cultural. Business unit incentives reward independence over integration. A pattern of strategic whiplash — driven by the Group CEO’s visionary ideation outpacing the organisation’s absorption capacity — has bred a “wait and see” culture among division leaders. Executive buy-in is uneven. Capability gaps persist.</p><p class="body-text">EMIR has been asked to provide advisory support across four integrated workstreams. First, strategic implementation support to realign BU incentives, KPIs, and leadership capabilities with Chapter 3 objectives. Second, the design of an innovation unit that serves as a structural buffer — absorbing the CEO’s ideas, filtering them against strategic fit, and cascading validated prototypes at a pace the organisation can sustain. Third, AI enablement of the Executive Office to strengthen group coordination. Fourth, the design and facilitation of the March leadership retreat as the catalytic moment for executive enrollment.</p><p class="body-text">We propose not a consulting engagement but a strategic partnership — bringing EMIR’s unique network of global advisors and experts to bear on the structural, cultural, and leadership dimensions of BEEAH’s most consequential transition. The engagement spans 12 weeks, culminating in the March retreat and the operational launch of the innovation unit.</p></div><span class="page-number">6</span></div><!-- ═══════════════════════════════════════════════════════════════════
+     PAGE 7: CONTEXT & OBJECTIVES
+     ═══════════════════════════════════════════════════════════════════ --><div class="page proposal-page"><div class="proposal-strip" id="i6gcat"></div><div class="proposal-body"><div class="proposal-heading display display-gold">CONTEXT &amp;<br/>OBJECTIVES</div><p class="body-text">BEEAH Group’s trajectory from a Sharjah-based waste management authority to a multi-vertical conglomerate spanning environment, real estate, and investments is a remarkable story of ambition matched by execution. The group processes over 3 million tonnes of waste annually, operates the region’s most advanced waste-to-energy facility, and has expanded into Saudi Arabia and Egypt — all under visionary leadership that consistently sees further than the market.</p><p class="body-text">But the conditions that enabled Chapters 1 and 2 are precisely the conditions that now create friction in Chapter 3. Autonomous business units, empowered by their own P&amp;Ls and incentive structures, have built operational cultures optimised for independence rather than integration. The emergence of Tadweer — ADQ’s direct competitive response to BEEAH’s regional dominance — has raised the strategic stakes. BEEAH’s 10x growth ambition over the next decade requires a group that moves as one, not three.</p><p class="body-text">The March leadership retreat represents the first formal opportunity to enroll the full executive team in this new chapter. The window to shape it — and to put the structural foundations in place — is now.</p><hr/></div><span class="page-number">7</span></div><!-- ═══════════════════════════════════════════════════════════════════
+     PAGE 8: SCOPE OF WORK
+     ═══════════════════════════════════════════════════════════════════ --><div class="page proposal-page"><div class="proposal-strip" id="i07kt2"></div><div class="proposal-body"><div class="proposal-heading display display-gold">SCOPE OF<br/>WORK</div><h3 class="section-minor">Workstream 1: Strategic Implementation Support — Business Unit Alignment</h3><p class="body-text"><strong>Objective:</strong> Align the incentive structures, KPIs, cultural attitudes, and leadership capabilities of BEEAH’s three business units with the Chapter 3 group strategy.</p><p class="body-text"><strong>1.1 Diagnostic &amp; Assessment (Weeks 1–4)</strong></p><ul><li>Conduct structured interviews with each business unit CEO and their direct reports to assess current understanding of, and commitment to, the Chapter 3 strategy</li><li>Map existing incentive structures (compensation, bonus triggers, KPIs, performance review criteria) across all three divisions to identify specific points of misalignment with group objectives</li><li>Assess inter-BU coordination mechanisms — where they exist, where they are absent, and where current incentives actively discourage collaboration</li><li>Evaluate leadership capability gaps within each BU executive team against the competencies required by Chapter 3 (global expansion readiness, cross-BU collaboration, innovation absorption capacity)</li><li>Deliver a confidential diagnostic report to the Group CEO and Executive Office</li></ul><p class="body-text"><strong>1.2 Incentive Realignment Framework (Weeks 4–8)</strong></p><ul><li>Design a recommended incentive realignment framework that introduces group-level KPIs alongside BU-specific targets — calibrated to drive inter-BU coordination without undermining divisional accountability</li><li>Propose shared-success mechanisms (e.g., cross-BU project bonuses, group EBITDA multipliers, shared services efficiency dividends) that make reconsolidation tangibly rewarding for BU leaders</li><li>Recommend specific changes to executive compensation structures, performance review processes, and reporting cadences</li><li>Stress-test the framework against each BU CEO’s likely objections and resistance patterns</li></ul><p class="body-text"><strong>1.3 Executive Enrollment Plan (Weeks 4–8, feeding into Workstream 4)</strong></p><ul><li>Develop a tailored enrollment strategy for each of the three BU CEOs — identifying what Chapter 3 means specifically for their division, their career, and their legacy</li><li>Design a structured engagement sequence (pre-retreat conversations, retreat sessions, post-retreat commitments) that builds genuine buy-in rather than performative compliance</li><li>Address the “wait and see” culture directly: propose commitment mechanisms and accountability structures that signal Chapter 3’s permanence</li></ul><p class="body-text"><strong>1.4 Capability Development Recommendations (Weeks 6–10)</strong></p><ul><li>Based on the diagnostic, recommend targeted interventions — executive coaching, strategic hires, team restructuring, or development programmes — to close identified capability gaps</li><li>Identify specific roles or competencies that must be recruited externally to support the global expansion ambition (particularly in waste-to-energy, international market entry, and digital transformation)</li></ul><hr/><h3 class="section-minor">Workstream 2: Innovation Unit Design — The Strategic Buffer</h3><p class="body-text"><strong>Objective:</strong> Design and stand up an innovation/prototyping unit that serves as a structured intermediary between the Group CEO’s visionary ideation and the business units’ operational execution — absorbing, filtering, and translating ideas into actionable prototypes at a pace the organisation can sustain.</p><p class="body-text"><strong>2.1 Operating Model Design (Weeks 2–6)</strong></p><ul><li>Define the innovation unit’s mandate, positioning, and relationship to the Group CEO, Executive Office, and business units — clarifying what it is (a rapid prototyping and idea-filtering function) and what it is not (a fourth business unit or a shadow executive office)</li><li>Design the unit’s operating model: team composition, skills profile, reporting lines, physical/virtual location, and interaction protocols with each BU</li><li>Establish the “idea intake” process: how the Group CEO’s concepts enter the unit, how they are assessed against strategic fit and feasibility, and how they are prioritised</li><li>Define the “prototype-to-cascade” process: how validated prototypes are handed off to business units for scaling, including knowledge transfer, resource allocation, and accountability handover mechanisms</li></ul><p class="body-text"><strong>2.2 Governance &amp; Budget Framework (Weeks 4–8)</strong></p><ul><li>Design the governance structure: decision rights, escalation paths, kill criteria for prototypes, and regular review cadences with the Group CEO and BU CEOs</li><li>Propose an annual budget framework and funding mechanism (ring-fenced group allocation vs. BU co-funding vs. project-specific budgets)</li><li>Define success metrics for the unit itself — speed of idea assessment, prototype completion rates, BU adoption rates, and strategic impact measures</li></ul><p class="body-text"><strong>2.3 Launch Roadmap (Weeks 6–10)</strong></p><ul><li>Develop a phased launch plan: founding team recruitment, initial project selection (recommend the AI enablement of the Executive Office as the inaugural project — see Workstream 3), and first 90-day milestones</li><li>Identify quick wins that demonstrate the unit’s value to both the Group CEO and the BU CEOs within the first quarter of operation</li><li>Design communication and branding for the unit that positions it as an enabler, not a competitor, to the business units</li></ul><hr/><h3 class="section-minor">Workstream 3: AI Enablement of the Executive Office</h3><p class="body-text"><strong>Objective:</strong> Diagnose and implement AI-powered tools and workflows that materially improve the Executive Office’s capacity to coordinate across BEEAH Group — and serve as the innovation unit’s proof-of-concept project.</p><p class="body-text"><strong>3.1 AI Enablement Diagnostic (Weeks 2–4)</strong></p><ul><li>Map the Executive Office’s current workflows, information flows, decision-support processes, and coordination mechanisms with the three BUs</li><li>Identify the highest-impact opportunities for AI augmentation — likely including: automated strategic intelligence briefings, cross-BU performance dashboards, meeting preparation and follow-up automation, and group-wide initiative tracking</li><li>Assess current technology infrastructure and data availability constraints</li></ul><p class="body-text"><strong>3.2 AI Roadmap &amp; Tool Selection (Weeks 4–6)</strong></p><ul><li>Develop a prioritised AI enablement roadmap for the Executive Office, sequenced by impact and implementation complexity</li><li>Recommend specific tools and platforms (commercial, custom, or hybrid) for each identified use case</li><li>Define data requirements, integration needs, and security/confidentiality parameters</li></ul><p class="body-text"><strong>3.3 Pilot Implementation (Weeks 6–12)</strong></p><ul><li>Implement the first two to three AI tools/workflows as a hands-on pilot</li><li>Train Firas, Nurhan, and the Executive Office team on adoption and daily use</li><li>Measure impact against pre-defined metrics (time saved, decision quality improvement, coordination effectiveness)</li><li>Document the implementation process as a replicable case study for the innovation unit’s future projects</li></ul><hr/><h3 class="section-minor">Workstream 4: March Leadership Retreat — Design &amp; Facilitation</h3><p class="body-text"><strong>Objective:</strong> Design and facilitate the March leadership retreat as a catalytic moment that enrolls BEEAH’s senior executive team in Chapter 3 — moving from awareness to ownership.</p><p class="body-text"><strong>4.1 Retreat Design (Weeks 1–{{TBD: weeks before retreat}})</strong></p><ul><li>Collaborate with the Executive Office to define retreat objectives, participant list, and desired outcomes</li><li>Design a retreat agenda that balances strategic alignment sessions, BU-specific breakouts, innovation unit introduction, and leadership bonding — structured to surface and address resistance constructively</li><li>Develop pre-retreat engagement materials (strategic briefing packs, diagnostic findings summaries, provocation papers) that ensure participants arrive prepared and oriented</li><li>Incorporate insights from Workstream 1 diagnostic findings to target specific alignment gaps and enrollment challenges</li></ul><p class="body-text"><strong>4.2 Facilitation Delivery (March {{TBD: exact date}})</strong></p><ul><li>Facilitate the full retreat programme on-site in {{TBD: retreat location}}</li><li>Lead strategic alignment discussions, innovation unit unveiling, and commitment-building exercises</li><li>Capture decisions, commitments, and open items in real-time</li></ul><p class="body-text"><strong>4.3 Post-Retreat Momentum (Week following retreat)</strong></p><ul><li>Deliver a retreat summary and commitment tracker to the Group CEO and Executive Office within 48 hours</li><li>Recommend a 90-day post-retreat accountability cadence to sustain momentum and convert retreat commitments into operational reality</li></ul><hr/><ol><li><strong>Incentive alignment:</strong> ≥ 80% of BU CEO KPIs incorporate group-level Chapter 3 objectives within 90 days of engagement completion</li><li><strong>Executive enrollment:</strong> All three BU CEOs articulate and commit to a specific Chapter 3 contribution plan by end of the March retreat</li><li><strong>Innovation unit operational:</strong> Founding team in place and first prototype project (AI enablement) underway within 60 days of operating model approval</li><li><strong>Executive Office AI adoption:</strong> Minimum three AI-powered workflows in daily use by Firas and Nurhan’s team within 12 weeks</li><li><strong>Strategic whiplash reduction:</strong> Measurable decrease in ad-hoc strategic pivots reaching BU operational level, with innovation unit absorbing ≥ 70% of new CEO-originated concepts within its first six months</li></ol><hr/></div><span class="page-number">8</span></div><!-- ═══════════════════════════════════════════════════════════════════
+     PAGE 9: METHODOLOGY & KEY DELIVERABLES
+     ═══════════════════════════════════════════════════════════════════ --><div class="page proposal-page"><div class="proposal-strip" id="ijbxsi"></div><div class="proposal-body"><div class="proposal-heading display display-gold">METHODOLOGY</div><p class="body-text"><strong>Workstream 1:</strong>
+- Confidential diagnostic report: BU incentive structures, capability gaps, and buy-in assessment
+- Incentive realignment framework with implementation recommendations
+- Tailored executive enrollment plan for each BU CEO
+- Capability gap remediation recommendations (coaching, hiring, restructuring)</p><p class="body-text"><strong>Workstream 2:</strong>
+- Innovation unit operating model (mandate, structure, team, processes)
+- Governance and budget framework
+- Prototype-to-cascade process design
+- Phased launch roadmap with 90-day milestones</p><p class="body-text"><strong>Workstream 3:</strong>
+- AI enablement diagnostic and prioritised roadmap
+- Tool selection and architecture recommendations
+- Pilot implementation of two to three AI workflows
+- Executive Office team training and adoption support</p><p class="body-text"><strong>Workstream 4:</strong>
+- Leadership retreat agenda and facilitation plan
+- Pre-retreat strategic briefing materials
+- On-site facilitation delivery
+- Post-retreat summary, commitment tracker, and 90-day accountability framework</p><hr/><p class="body-text">Our approach is built on three principles that distinguish EMIR from traditional management consultancies:</p><p class="body-text"><strong>Direct access, not delegated research.</strong> Every diagnostic conversation, facilitation session, and design workshop will be led by senior EMIR partners — not junior analysts assembling frameworks from secondary sources. We speak directly with the principals who hold the power and the context.</p><p class="body-text"><strong>Network-powered insight.</strong> We will draw on our unique network of global advisors and experts — including individuals with direct experience in global waste management leadership, GCC sovereign conglomerate governance, corporate innovation unit design, and AI-enabled executive operations. These are not theoretical inputs; they are practitioners who have built and led the structures we are proposing.</p><p class="body-text"><strong>Embedded collaboration, not external prescription.</strong> We will work alongside Firas, Nurhan, and the Executive Office as embedded partners — not as external consultants delivering reports from a distance. Design sessions will be co-creative. Recommendations will be stress-tested in real-time with the people responsible for implementing them.</p><p class="body-text">Specific methods include:
+- Structured one-on-one interviews with all BU CEOs and select direct reports
+- Executive Office workflow shadowing and AI readiness assessment
+- Facilitated design workshops for the innovation unit operating model
+- Benchmarking against comparable innovation structures in GCC sovereign entities and global environmental services firms
+- On-site retreat facilitation with pre- and post-retreat engagement sequences</p><hr/></div><span class="page-number">9</span></div><!-- ═══════════════════════════════════════════════════════════════════
+     PAGE 10: TIMELINE
+     ═══════════════════════════════════════════════════════════════════ --><div class="page proposal-page"><div class="proposal-strip" id="i28a67"></div><div class="proposal-body"><div class="proposal-heading display display-gold">TIMELINE</div><p class="body-text">
+      [Overview of the project timeline and key milestones.]
+    </p><p class="body-text">[Timeline will appear here]</p></div><span class="page-number">10</span></div><!-- ═══════════════════════════════════════════════════════════════════
+     PAGE 11: INVESTMENT
+     ═══════════════════════════════════════════════════════════════════ --><div class="page investment-page"><div class="investment-banner" id="i2wckl"></div><div class="investment-content"><div class="investment-heading display display-gold">INVESTMENT</div><p class="body-text">
+      EMIR will engage on a time and materials basis for this project
+      and estimate the total cost at
+      <strong>[TBD] AED</strong>,
+      based on the following rates:
+    </p><table class="fee-table"><thead><tr><th>Grade</th><th>Day Rate (AED)</th><th>Number of Units</th><th>Sub-Total</th></tr></thead><tbody><tr><td>Managing Partners</td><td>[Rate]</td><td>[Units]</td><td>[Sub-total]</td></tr><tr><td>Senior Associates</td><td>[Rate]</td><td>[Units]</td><td>[Sub-total]</td></tr><tr><td>Consultants</td><td>[Rate]</td><td>[Units]</td><td>[Sub-total]</td></tr><tr><td>External Experts (per interview)</td><td>[Rate]</td><td>[Units]</td><td>[Sub-total]</td></tr><tr class="total"><td>Total</td><td></td><td></td><td>[TBD]</td></tr></tbody></table><p class="footnote">
+      [All fees are exclusive of VAT. Travel and accommodation expenses
+      will be invoiced separately at cost.]
+    </p></div><span class="page-number">11</span></div><!-- ═══════════════════════════════════════════════════════════════════
+     PAGE 12: ASSUMPTIONS & NEXT STEPS
+     ═══════════════════════════════════════════════════════════════════ --><div class="page proposal-page"><div class="proposal-strip" id="intk8g"></div><div class="proposal-body"><div class="proposal-heading display display-gold">ASSUMPTIONS<br/>&amp; NEXT STEPS</div><ul><li><strong>Engagement duration:</strong> 12 weeks from commencement, subject to confirmation of the March retreat date</li><li><strong>Extension:</strong> Should additional support be required beyond the initial scope — including innovation unit recruitment support, extended AI implementation, or ongoing BU alignment coaching — EMIR would be honoured to propose a Phase 2 engagement on terms to be agreed</li><li><strong>Expenses:</strong> Travel (business class), accommodation, and incidental expenses will be reimbursed at cost upon submission of receipts, with expenses exceeding AED 5,000 per trip requiring prior written approval</li><li><strong>Liability:</strong> EMIR’s aggregate liability under this engagement shall not exceed the total fees received. EMIR is not liable for the performance or quality of any third-party vendors, platforms, or tools recommended during the engagement</li></ul><hr/><p class="body-text">All information shared by BEEAH Group during this engagement will be treated with the highest degree of discretion. EMIR will restrict access to engagement materials on a strict need-to-know basis within our team. No information, findings, or deliverables will be shared with any external party without BEEAH’s prior written consent. Sensitive materials will be transmitted via encrypted channels.</p><hr/><ol><li><p class="body-text"><strong>GCC Sovereign Conglomerate — Strategic Reconsolidation Advisory</strong>
+   Advised the executive leadership of a major GCC state-owned holding company on the realignment of five autonomous subsidiaries around a unified national mandate. Scope included incentive restructuring, CEO enrollment strategy, and board-level governance redesign. The engagement resulted in the adoption of a group-wide balanced scorecard and the successful integration of two previously competing subsidiaries.</p></li><li><p class="body-text"><strong>Government Entity — Innovation Unit Design &amp; Launch</strong>
+   Designed and launched an innovation and future-readiness unit within a prominent Gulf government entity. Scope included operating model design, founding team recruitment, governance framework, and first-year project portfolio selection. The unit delivered its first three prototypes within 90 days and has since been adopted as a model by two other government entities in the region.</p></li><li><p class="body-text"><strong>Regional Environmental Services Company — International Expansion Strategy</strong>
+   Supported a GCC-based environmental services company in developing its market entry strategy for two new geographies, including stakeholder mapping, regulatory analysis, partnership identification, and go-to-market planning. EMIR’s network provided direct introductions to key decision-makers in target markets.</p></li><li><p class="body-text"><strong>Executive Office Enablement — AI &amp; Digital Transformation</strong>
+   Advised the CEO office of a diversified regional holding group on AI-enabled workflows for strategic coordination, including automated intelligence briefings, cross-subsidiary performance dashboards, and decision-support tools. Pilot implementation achieved a 40% reduction in meeting preparation time and measurably improved cross-entity information flow.</p></li><li><p class="body-text"><strong>Board Retreat &amp; Leadership Facilitation</strong>
+   Designed and facilitated multiple board retreats and leadership alignment sessions for sovereign entities and conglomerates across the GCC, including the BEEAH Group board retreat in November {{TBD: year}}. Our facilitation approach is known for surfacing constructive tension, building genuine commitment, and producing actionable outcomes — not performative consensus.</p></li></ol><hr/><p class="body-text"><em>EMIR would be honoured to partner with BEEAH Group on what we believe is the most consequential chapter of the organisation’s journey. We welcome the opportunity to discuss this proposal in detail.</em></p><p class="body-text"><strong>EMIR Advisory</strong></p><p class="body-text">{{TBD: signatory name and title}}</p><p class="body-text">{{TBD: contact details}}</p><h2 class="section-sub">Open Items</h2><ul class="assumption-list"><li>Confirm exact spelling and title of champion: Firas vs. Faris — contact card to be obtained</li><li>Confirm March leadership retreat exact date and location</li><li>Confirm engagement start date to calibrate 12-week timeline against retreat</li><li>Define retreat participant list and scope with Executive Office</li><li>Confirm project team: Managing Partner, Innovation Unit Design lead, and AI Enablement lead bios needed</li><li>Determine and insert fee amounts for each workstream and total engagement fee (AED)</li><li>Confirm whether client prefers combined engagement or workstream-by-workstream contracting</li><li>Confirm year reference for November board retreat</li><li>Obtain Nurhan's full name and confirm title</li><li>Determine signatory and sender details for proposal and cover email</li><li>Clarify whether BEEAH prefers 'BIA Group' or 'BEEAH Group' as the formal name in external documents</li></ul><p class="footnote" id="i1dj6o">
+      CONFIDENTIAL
+    </p></div><span class="page-number">12</span></div><!-- ═══════════════════════════════════════════════════════════════════
+     BACK PAGE
+     ═══════════════════════════════════════════════════════════════════ --><div class="page back-page"><img src="extracted_assets/EMIR_logo_backpage_white_461x236.png" alt="EMIR" class="back-logo"/><div class="back-logo-text" id="ikaf0k">EMIR</div><div class="back-contact">
+    www.emirgroup.com<br/>
+    Level 1, Office 124, Building 9<br/>
+    Dubai Media City, Dubai U.A.E.<br/>
+    Phone: +971 4 558 8199
+  </div></div><!-- ═══════════════════════════════════════════════════════════════════
+     PAGE SPLITTER — detects overflow on .proposal-page elements
+     and splits them into A4-sized continuation pages.
+     Runs after DOM layout so offsetHeight is accurate.
+     ═══════════════════════════════════════════════════════════════════ --></body>
+</body>
+</html>
